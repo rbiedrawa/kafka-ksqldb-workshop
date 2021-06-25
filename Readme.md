@@ -7,6 +7,8 @@ This repository contains the starter code for the **ksqlDB** workshop.
 This workshop will demonstrate how to integrate ksqlDB with an external data source (Elasticsearch) to build **Driver
 Location Tracking & Monitoring** app.
 
+![driver-live-location-dashboard.png](./_docs/img/driver-live-location-dashboard.png)
+
 ## Getting Started
 
 Use Docker Compose ([docker-compose.yml](docker/docker-compose.yml)) for setting up and running the infrastructure,
