@@ -63,8 +63,8 @@ docker compose exec ksqldb-cli bash ksql http://ksqldb-server:8088
 #### 4. Create driver profile table in ksqlDB
 
 ```shell
-CREATE TABLE driver_profile_table (driver_id BIGINT PRIMARY KEY, name VARCHAR)
-  WITH ( kafka_topic='driver.profile.events', value_format='AVRO', partitions=6);
+CREATE TABLE driver_table (driver_id BIGINT PRIMARY KEY, name VARCHAR)
+  WITH (kafka_topic='driver.info.snapshots', value_format='AVRO', partitions=6);
 ```
 
 #### 5. Create stream for driver location events
@@ -74,18 +74,18 @@ CREATE STREAM driver_location_stream (driver_id BIGINT KEY, location STRUCT<lat 
   WITH (kafka_topic='driver.location.events', value_format='AVRO', partitions=6);
 ```
 
-#### 6. Enrich driver_location stream by joining with driver_profile table
+#### 6. Enrich driver_location stream by joining with driver table
 
 ```shell
 CREATE STREAM enriched_driver_location_stream  WITH (
   kafka_topic='driver.location.enriched.events',
   value_format='AVRO') AS
   SELECT
-    driver_profile.driver_id       AS driver_id,
-    driver_profile.name            AS driver_name,
+    driver.driver_id       AS driver_id,
+    driver.name            AS driver_name,
     CAST(location->lat AS STRING) + ',' + CAST(location->lon AS STRING) AS location
-  FROM driver_location_stream driver_location JOIN driver_profile_table driver_profile
-    ON driver_location.driver_id = driver_profile.driver_id
+  FROM driver_location_stream driver_location JOIN driver_table driver
+    ON driver_location.driver_id = driver.driver_id
   EMIT CHANGES;
 ```
 
@@ -109,19 +109,19 @@ show tables;
 
 #  Table Name           | Kafka Topic           | Key Format | Value Format | Windowed 
 # -------------------------------------------------------------------------------------
-#  DRIVER_PROFILE_TABLE | driver.profile.events | KAFKA      | AVRO         | false    
+#  DRIVER_TABLE | driver.info.snapshots | KAFKA      | AVRO         | false    
 # -------------------------------------------------------------------------------------
 ```
 
 #### 9. Write data to driver profile table
 
 ```shell
-INSERT INTO driver_profile_table (driver_id, name) VALUES (1, 'Driver 1');
-INSERT INTO driver_profile_table (driver_id, name) VALUES (2, 'Driver 2');
-INSERT INTO driver_profile_table (driver_id, name) VALUES (3, 'Driver 3');
-INSERT INTO driver_profile_table (driver_id, name) VALUES (4, 'Driver 4');
-INSERT INTO driver_profile_table (driver_id, name) VALUES (5, 'Driver 5');
-INSERT INTO driver_profile_table (driver_id, name) VALUES (6, 'Driver 6');
+INSERT INTO driver_table (driver_id, name) VALUES (1, 'Driver 1');
+INSERT INTO driver_table (driver_id, name) VALUES (2, 'Driver 2');
+INSERT INTO driver_table (driver_id, name) VALUES (3, 'Driver 3');
+INSERT INTO driver_table (driver_id, name) VALUES (4, 'Driver 4');
+INSERT INTO driver_table (driver_id, name) VALUES (5, 'Driver 5');
+INSERT INTO driver_table (driver_id, name) VALUES (6, 'Driver 6');
 ```
 
 #### 10. Write data to driver location stream
@@ -135,10 +135,10 @@ INSERT INTO driver_location_stream (driver_id, location) VALUES (5, STRUCT(lat :
 INSERT INTO driver_location_stream (driver_id, location) VALUES (6, STRUCT(lat := 50.06721095767255, lon := 19.87215179908983));
 ```
 
-#### 11. Print the raw data from `driver.profile.events` topic
+#### 11. Print the raw data from `driver.info.snapshots` topic
 
 ```shell
-PRINT 'driver.profile.events' FROM BEGINNING;
+PRINT 'driver.info.snapshots' FROM BEGINNING;
 ```
 
 #### 12. Tell ksqlDB to start all queries from `earliest` point in each topic
