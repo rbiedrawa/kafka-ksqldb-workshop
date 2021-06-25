@@ -4,8 +4,8 @@ This repository contains the starter code for the **ksqlDB** workshop.
 
 ## Overview
 
-This workshop will demonstrate how to integrate ksqlDB with an external data source (Elasticsearch) to build **Driver
-Location Tracking & Monitoring** app.
+This workshop explains how to integrate ksqlDB with an external data source (Elasticsearch) to build **Driver
+Location Tracking & Monitoring** app and develop ksqlDB queries.
 
 ![driver-live-location-dashboard.png](./_docs/img/driver-live-location-dashboard.png)
 
