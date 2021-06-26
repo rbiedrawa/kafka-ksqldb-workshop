@@ -105,7 +105,7 @@ services:
       KSQL_CONNECT_LOG4J_APPENDER_STDOUT_LAYOUT_CONVERSIONPATTERN: "[%d] %p %X{connector.context}%m (%c:%L)%n"
       KSQL_CONNECT_PLUGIN_PATH: "/usr/share/kafka/plugins"
     volumes:
-      - ./confluent-hub-components:/usr/share/kafka/plugins
+      - ./connectors:/usr/share/kafka/plugins
 
   ksqldb-cli:
     image: confluentinc/cp-ksqldb-cli:6.2.0
