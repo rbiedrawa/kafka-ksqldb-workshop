@@ -9,6 +9,10 @@ Location Tracking & Monitoring** app and use streaming SQL engine for Apache Kaf
 
 ![driver-live-location-dashboard.png](./_docs/img/driver-live-location-dashboard.png)
 
+###  Architecture
+
+![architecture](./_docs/img/architecture.png)
+
 ## Getting Started
 
 Use Docker Compose ([docker-compose.yml](docker/docker-compose.yml)) for setting up and running the infrastructure,
@@ -302,6 +306,8 @@ docker compose down -v
 * [Confluent Hub](https://www.confluent.io/hub/)
 * [Kafka Connect UI](https://github.com/lensesio/kafka-connect-ui)
 * [cloudhut/kowl](https://github.com/cloudhut/kowl)
+* [Elasticsearch](https://www.elastic.co/elasticsearch/)
+* [Kibana](https://www.elastic.co/kibana)
 * [How to Visualize Geo Data on a Map with Kibana - Version 7.10](https://www.youtube.com/watch?v=slwlQQLesKA)
 
 ## License
