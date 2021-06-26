@@ -301,6 +301,7 @@ docker compose down -v
 ## References
 
 * [ksqlDB](https://docs.ksqldb.io/en/latest/reference/)
+* [ksqlDB Headless Server Settings](https://docs.ksqldb.io/en/latest/operate-and-deploy/installation/install-ksqldb-with-docker/#ksqldb-headless-server-settings)  
 * [Kafka Docker Images](https://github.com/confluentinc/kafka-images)
 * [Elasticsearch Sink Connector](https://docs.confluent.io/kafka-connect-elasticsearch/current/index.html)
 * [Confluent Hub](https://www.confluent.io/hub/)
