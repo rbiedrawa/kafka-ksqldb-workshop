@@ -30,7 +30,7 @@ The following tools are available when you run the whole infrastructure:
 * [Elasticsearch](https://www.elastic.co/elasticsearch/)
 * [Kibana](https://www.elastic.co/kibana)
 
-### Prerequisite
+### Prerequisites
 
 * Docker
 
